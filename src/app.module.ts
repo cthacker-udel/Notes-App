@@ -8,25 +8,7 @@ import { Note } from './entities/notes/Note';
 import { NotesService } from './notes/notes.service';
 
 @Module({
-  imports: [
-
-    TypeOrmModule.forRoot({
-
-        type: "mongodb",
-        host: "localhost",
-        port: 3006,
-        username: MongoDBConfiguration.username,
-        password: MongoDBConfiguration.password,
-        database: MongoDBConfiguration.database,
-        entities: [Note],
-        synchronize: true,
-        extra: {
-            useUnifiedTopology: true
-        }
-
-    })
-
-  ],
+  imports: [],
   controllers: [AppController, NotesController],
   providers: [AppService, NotesService],
 })

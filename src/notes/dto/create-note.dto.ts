@@ -1,7 +1,7 @@
 export class CreateNoteDto {
     
-    creator: string
-    content: string
+    message: string
+    sender: string
     date: string
 
 }

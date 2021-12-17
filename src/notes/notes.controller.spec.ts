@@ -15,7 +15,7 @@ describe('NotesController', () => {
 
     describe('root', () => {
         it('should return One Note', () => {
-            expect(notesController.getOne()).toBe('One note');
+            expect(notesController.getOne('cthacker')).toBe('One note');
         })
     })
 });

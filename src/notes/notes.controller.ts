@@ -1,8 +1,8 @@
-import { CreateNoteDto } from './create-note.dto';
+import { CreateNoteDto } from './dto/create-note.dto';
 import { Body, Controller, Get, HttpCode, Ip, Param, Post, Req, UsePipes, ValidationPipe } from "@nestjs/common";
 import { Request } from "express";
 import { NotesService } from './notes.service';
-import { Note } from 'src/interfaces/Note';
+import { Note } from './interfaces/Note';
 
 
 @Controller('notes')
@@ -13,8 +13,8 @@ export class NotesController{
     @Post()
     async create(@Body() body: CreateNoteDto) {
         this.notesService.create({
-            message: body.content,
-            sender: body.creator,
+            message: body.message,
+            sender: body.sender,
             date: body.date
         });
     }
