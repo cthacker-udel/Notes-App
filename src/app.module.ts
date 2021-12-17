@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { NotesController } from './notes/notes.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Note } from './entities/notes/Note';
+import { NotesService } from './notes/notes.service';
 
 @Module({
   imports: [
@@ -16,13 +18,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: MongoDBConfiguration.username,
         password: MongoDBConfiguration.password,
         database: MongoDBConfiguration.database,
-        entities: [],
-        synchronize: true
+        entities: [Note],
+        synchronize: true,
+        extra: {
+            useUnifiedTopology: true
+        }
 
     })
 
   ],
   controllers: [AppController, NotesController],
-  providers: [AppService],
+  providers: [AppService, NotesService],
 })
 export class AppModule {}
