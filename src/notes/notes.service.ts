@@ -24,4 +24,19 @@ export class NotesService {
         return noteEntities;
     }
 
+    async findOne(sender: string): Promise<NoteEntity[]> {
+        const filteredNotes: NoteEntity[] = [];
+        const mongoRepository: MongoRepository<NoteEntity> = getMongoRepository(NoteEntity);
+        await mongoRepository.find({
+            where: {
+                sender: {$eq: sender}
+            }
+        })
+        .then((result) => result.forEach((eachNote) => filteredNotes.push(eachNote)))
+        .catch((error) => {
+            throw new Error(error)
+        });
+        return filteredNotes;
+    }
+
 };
