@@ -3,6 +3,7 @@ import { Body, Controller, Get, HttpCode, Ip, Param, Post, Req, UsePipes, Valida
 import { Request } from "express";
 import { NotesService } from './notes.service';
 import { Note } from './interfaces/Note';
+import { Note as NoteEntity } from './entities/note.entity';
 
 
 @Controller('notes')
@@ -20,13 +21,22 @@ export class NotesController{
     }
 
     @Get('all')
-    getAll(): Note[] {
-        return this.notesService.findAll();
+    async getAll() {
+        const noteEntities: NoteEntity[] = [];
+        this.notesService.findAll()
+        .then((noteEntityArray) => {
+            noteEntityArray.forEach((eachNote) => noteEntities.push(eachNote))
+        })
+        .catch((error) => {
+            console.log("erorr with getting all notes");
+        });
+        return noteEntities;
     }
 
     @Get(':id')
-    getOne(@Param('sender') id: string): Note[]{
-        return this.notesService.findAll().filter((eachNote) => eachNote.sender === id);
+    getOne(@Param('sender') id: string): NoteEntity[] {
+        const foundNotes: NoteEntity[] = [];
+
     }
 
 }
