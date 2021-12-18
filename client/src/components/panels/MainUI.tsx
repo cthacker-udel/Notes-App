@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
+import { NoteNavbar } from "../navbars/NoteNavbar";
+import { NotesTable } from "../tables/NotesTable";
 
 export const MainUI = () => {
 
@@ -9,9 +10,8 @@ export const MainUI = () => {
     return(
 
         <>
-        
-            
-        
+            <NoteNavbar />
+            <NotesTable />
         </>
 
     )
