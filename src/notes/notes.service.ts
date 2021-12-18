@@ -14,29 +14,12 @@ export class NotesService {
     }
 
     async findAll(): Promise<NoteEntity[]> {
-        const noteEntities: NoteEntity[] = [];
-        this.manager = getMongoManager("manager");
-        await this.manager.find(NoteEntity)
-        .then((result) => result.forEach((eachNote) => noteEntities.push(eachNote)))
-        .catch((err) => {
-            throw new Error("error finding all notes");
-        })
-        return noteEntities;
+        this.manager = getMongoManager("mongo");
+        return await this.manager.find(NoteEntity);
     }
 
-    async findOne(sender: string): Promise<NoteEntity[]> {
-        const filteredNotes: NoteEntity[] = [];
-        const mongoRepository: MongoRepository<NoteEntity> = getMongoRepository(NoteEntity);
-        await mongoRepository.find({
-            where: {
-                sender: {$eq: sender}
-            }
-        })
-        .then((result) => result.forEach((eachNote) => filteredNotes.push(eachNote)))
-        .catch((error) => {
-            throw new Error(error)
-        });
-        return filteredNotes;
+    async findOne(senderName: string): Promise<NoteEntity> {
+        return await getMongoManager("mongo").findOne(NoteEntity, { "sender": senderName });
     }
 
 };

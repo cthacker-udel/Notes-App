@@ -4,6 +4,7 @@ import { Request } from "express";
 import { NotesService } from './notes.service';
 import { Note } from './interfaces/Note';
 import { Note as NoteEntity } from './entities/note.entity';
+import { resolve } from 'path/posix';
 
 
 @Controller('notes')
@@ -18,25 +19,16 @@ export class NotesController{
             sender: body.sender,
             date: body.date
         });
-    }
+    };
 
     @Get('all')
-    async getAll() {
-        const noteEntities: NoteEntity[] = [];
-        this.notesService.findAll()
-        .then((noteEntityArray) => {
-            noteEntityArray.forEach((eachNote) => noteEntities.push(eachNote))
-        })
-        .catch((error) => {
-            console.log("erorr with getting all notes");
-        });
-        return noteEntities;
-    }
+    getAll(): Promise<NoteEntity[]> {
+        return this.notesService.findAll()
+    };
 
     @Get(':id')
-    getOne(@Param('sender') id: string): NoteEntity[] {
-        const foundNotes: NoteEntity[] = [];
-
-    }
+    getOne(@Param('id') id: string): Promise<NoteEntity> {
+        return this.notesService.findOne(id);
+    };
 
 }
