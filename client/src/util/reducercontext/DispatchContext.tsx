@@ -1,3 +1,4 @@
 import React from "react";
+import { NoteAction } from "../../interfaces/NoteAction";
 
-export const DispatchContext = React.createContext<T | undefined>(undefined);
+export const DispatchContext = React.createContext<React.Dispatch<NoteAction> | undefined>(undefined);
