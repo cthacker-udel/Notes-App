@@ -31,4 +31,9 @@ export class NotesController{
         return this.notesService.findOne(id);
     };
 
+    @Get('all/:id')
+    getAllBySender(@Param('id') id: string): Promise<NoteEntity[]> {
+        return this.notesService.findAllBySender(id);
+    };
+
 }
