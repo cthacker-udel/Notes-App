@@ -1,10 +1,11 @@
 import { CreateNoteDto } from './dto/create-note.dto';
-import { Body, Controller, Get, HttpCode, Ip, Param, Post, Req, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Ip, Param, Post, Req, UsePipes, ValidationPipe } from "@nestjs/common";
 import { Request } from "express";
 import { NotesService } from './notes.service';
 import { Note } from './interfaces/Note';
 import { Note as NoteEntity } from './entities/note.entity';
 import { resolve } from 'path/posix';
+import { DeleteResult } from 'typeorm';
 
 
 @Controller('notes')
@@ -36,4 +37,8 @@ export class NotesController{
         return this.notesService.findAllBySender(id);
     };
 
-}
+    @Delete("all/:id")
+    deleteAll(@Param('id') id: string): Promise<DeleteResult> {
+        return this.notesService.deleteAllBySender(id);
+    };
+};
