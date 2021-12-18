@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "concurrently --kill-others-on-fail \"cd server && npm run start\" \"cd client && npm run start\""
   },
   "keywords": [],
   "author": "",
