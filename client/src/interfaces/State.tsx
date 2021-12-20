@@ -1,5 +1,6 @@
 import { Note } from "./Note";
 
 export interface State{
-    notes: Note[]
+    notes: Note[],
+    addedNote: Note
 };

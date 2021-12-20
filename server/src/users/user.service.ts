@@ -15,6 +15,7 @@ export class UserService {
         return await getMongoManager("mongo").find(UserEntity, {
             first: firstName
         });
-    }
+    };
+
 
 };

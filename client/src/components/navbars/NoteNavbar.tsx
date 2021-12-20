@@ -25,7 +25,7 @@ export const NoteNavbar = () => {
                                     </Button>
                                 </ButtonGroup>
                             </Link>
-                            <Link to="addNote">
+                            <Link to="/addNote">
                                 <ButtonGroup className="me-2">
                                     <Button>
                                         Add Note
