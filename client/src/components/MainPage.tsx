@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
 import { MainUI } from "./panels/MainUI";
 import { StateContext } from "../util/reducercontext/StateContext";
@@ -6,14 +6,22 @@ import { DispatchContext } from "../util/reducercontext/DispatchContext";
 import { NoteDispatcher } from "../util/reducerlogic/DispatchFunctions/NoteDispatcher";
 import InitialState from "../assets/InitialState";
 import { AddNoteForm } from "./forms/AddNoteForm";
+import { Note } from "../interfaces/Note";
 
 export const MainPage = () => {
 
     const [state, dispatch] = useReducer(NoteDispatcher, InitialState);
 
-    const { 
-        notes
-    } = state;
+    useEffect(() => {
+
+        fetch("http://localhost:3005/notes/all").then((allNotes) => {
+            allNotes.json().then((jsonResponse: Note[]) => {
+                jsonResponse.forEach((eachNote: Note) => {
+                    dispatch({type: "addNote", payload: { ...state, addedNote: eachNote}});
+                })
+            });
+        });
+    },[]);
 
     const stateValue = { state };
     const dispatchValue = { dispatch };
