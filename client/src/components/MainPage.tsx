@@ -7,6 +7,7 @@ import { NoteDispatcher } from "../util/reducerlogic/DispatchFunctions/NoteDispa
 import InitialState from "../assets/InitialState";
 import { AddNoteForm } from "./forms/AddNoteForm";
 import { Note } from "../interfaces/Note";
+import { DeleteNoteForm } from "./forms/DeleteNoteForm";
 
 export const MainPage = () => {
 
@@ -47,6 +48,14 @@ export const MainPage = () => {
                             <AddNoteForm />
                         </StateContext.Provider>
                     </DispatchContext.Provider>
+                }
+                />
+                <Route path="/deleteNote" element={
+                    <DispatchContext.Provider value={dispatchValue}>
+                        <StateContext.Provider value={stateValue}>
+                            <DeleteNoteForm />
+                        </StateContext.Provider>
+                    </DispatchContext.Provider>     
                 }
                 />
                 <Route path="/" element={<Navigate to="/mainpage" />} />

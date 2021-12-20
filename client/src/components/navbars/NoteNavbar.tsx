@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonToolbar, Container, Nav, Navbar, ButtonGroup } from "react-bootstrap";
+import { Button, ButtonToolbar, Container, Navbar, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NoteNavbar = () => {

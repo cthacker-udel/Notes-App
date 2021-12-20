@@ -12,6 +12,13 @@ export const NoteDispatcher = (state: State, action: NoteAction): State => {
             });
         }
 
+        case "removeNoteBySender": {
+            return produce(state, (draft) => {
+                const senderToDelete = action.payload.addedNote.sender;
+                draft.notes = draft.notes.filter((eachNote) => eachNote.sender !== senderToDelete);
+            })
+        }
+
         default: {
             return {...state};
         }
