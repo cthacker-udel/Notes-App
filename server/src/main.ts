@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { Connection, createConnection } from 'typeorm';
 import { AppModule } from './app.module';
 import { Note as NoteEntity } from './notes/entities/note.entity';
+const cors = require('cors');
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -16,7 +17,7 @@ async function bootstrap() {
 
     }
   )
-
+  app.use(cors());
   await app.listen(3005);
 }
 bootstrap();

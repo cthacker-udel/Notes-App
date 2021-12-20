@@ -28,7 +28,7 @@ export const AddNoteForm = () => {
             });
         }
 
-    }, [quill]);
+    }, [quill, quillRef]);
 
     const submitNote = () => {
         console.log("in submit note, msg = ", message);
@@ -38,6 +38,19 @@ export const AddNoteForm = () => {
                 message: message,
                 date: new Date().toUTCString()
             }}});
+            fetch("http://localhost:3005/notes", {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message,
+                    sender: theSender,
+                    date: new Date().toUTCString()
+                })
+            })
         }
     }
 
