@@ -14,7 +14,7 @@ export const DeleteNoteForm = () => {
     console.log("ids = ", ids);
 
     const removeNote = (sender: string): void => {
-        fetch(`http://localhost:3005/notes/${sender}`, 
+        fetch(`http://localhost:3005/notes/all/${sender}`, 
             {
                 method: "DELETE",
                 mode: "cors",
